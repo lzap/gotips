@@ -1,0 +1,151 @@
+# Go Tips and Tricks
+
+Lukáš Zapletal
+15. May 2025
+lzap@redhat.com
+
+## Contents
+
+- Random tips
+- No particular order
+- Assembled from other sources
+- Links at the end
+- Please contribute more tips: github.com/lzap/gotips
+
+## Built-ins: print & println
+
+Go has the following built-in functions: new, make, copy, len, cap, append, delete, close, panic, recover, complex, real, imag, print and println.
+
+I find `println` very useful, no need to import.
+
+.play print/main.go
+
+## Getters and setters
+
+Avoid Get prefix and if you can, getters and setters altogether.
+
+.code getters/main.go
+
+## Use export_test.go
+
+File named `export_test.go` will be only available from `package_test` package. Useful for testing:
+
+.code getters/export_test.go
+
+.code getters/main_test.go
+
+## Type inference and re-declaration
+
+Go's type inference is generally quite powerful and convenient, but it does have some quirks and situations that can be surprising or require careful attention.
+
+.play -edit inference/main.go
+
+## Type inference and re-declaration
+
+Type inference will not work for `nil`.
+
+.code inference/main.go HLnil
+
+## Type inference and re-declaration
+
+Re-declaration is allowed within the same block (or a child block) if the at least one new variable is re-declared but not all and the types do match.
+
+.code inference/main.go HLerr
+
+## Type aliases
+
+Type alias is just another name for the same underlying type.
+
+.play -edit aliases/main.go
+
+## Type aliases
+
+Type aliases cannot have methods: `cannot define new methods on non-local type MyAlias`
+
+.code aliases/main.go HLmethod
+
+## Type aliases
+
+The inferred type `int` does not match `MyInt` type: `interface conversion: interface {} is int, not main.MyInt`
+
+.code aliases/main.go HLassert
+
+## Loop inference
+
+The most famous Go quirk.
+
+.play loopcopy/problem.go
+
+## Loop inference
+
+Beware that `p` is a copy of the slice element.
+
+.play loopcopy/problem.go HLcopy
+
+## Loop inference
+
+Possible solution:
+
+.play loopcopy/main.go
+
+## Stack and heap
+
+The rough estimation is that structs up to about 60-100 bytes are faster to be passed by value when they do not escape into heap.
+
+.code stack/main.go
+
+## Stack and heap
+
+Fun quiz, what will it print?
+
+.code stackrealloc/quiz.go
+
+## Stack and heap
+
+Go runtime creates local variables on stack, but as it grow it can move it to heap if needed.
+
+.play stackrealloc/main.go
+
+## Pointers
+
+Grabbing a reference.
+
+.play ptr/to.go
+
+## Pointers
+
+Dereferencing with an empty value.
+
+.play ptr/from.go
+
+## Pointers
+
+Dereferencing with a default value.
+
+.play ptr/or.go
+
+## Pointers
+
+Value assignment with a default value.
+
+.play ptr/cmp.go
+
+## Resources
+
+- [Effective Go](https://go.dev/doc/effective_go)
+- [Go Critic large struct rule](https://go-critic.com/overview.html#hugeparam)
+- [Passing values by value or ref](https://blog.boot.dev/golang/pointers-faster-than-values/)
+
+## TODO
+
+Further ideas:
+
+- new/make does not guarantee heap
+- pass by copy or reference
+- implicit interfaces, one method interfaces, unique feature of Go
+- defer order
+- context
+- errors are strings, use wrapping but note can be slow
+- logging log/slog, libs should have a simple interface, do not log AND return errors
+- local variable in a loop always allocate, compiler will not optimize it
+- testdata dir
