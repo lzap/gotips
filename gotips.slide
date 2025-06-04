@@ -178,9 +178,9 @@ QUIZ: What will be on the `stderr`?
 
 ## Slices
 
-QUIZ: What will be on the `stderr`?
+QUIZ: Will this compile? Which line is a bug?
 
-.play slices_nil/main.go
+.play -numbers slices_nil/main.go
 
 ## Memory
 

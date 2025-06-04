@@ -5,6 +5,10 @@ func main() {
 
 	println(len(s))
 
+	for i, v := range s {
+		println(i, v)
+	}
+
 	s = append(s, "hello")
 
 	println(s)
