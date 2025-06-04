@@ -2,8 +2,11 @@ package main
 
 import "errors"
 
-func ProcessBug() {
-	err := Do()
+var ErrQueueFull = errors.New("queue is full")
+
+func main() {
+	// START OMIT
+	err := DoSomething()
 
 	if errors.Is(err, ErrSomething) {
 		println("Error value", err.Error())
@@ -13,4 +16,5 @@ func ProcessBug() {
 	if errors.As(err, &sErr) {
 		println("Error type", err.Error())
 	}
+	// END OMIT
 }

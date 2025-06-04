@@ -2,7 +2,7 @@ package main
 
 type MyInt int
 
-type MyAlias = int
+type MyAlias = int // HLalias
 
 func (MyAlias) Do() {} // HLmethod
 

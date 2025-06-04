@@ -5,6 +5,7 @@ import (
 	"strconv"
 )
 
+// START OMIT
 func sum(a, b string) (int, error) {
 	x, e1 := strconv.Atoi(a)
 	y, e2 := strconv.Atoi(b)
@@ -19,3 +20,4 @@ func main() {
 	s, _ := sum("1", "2")
 	println("1+2", "=", s)
 }
+// END OMIT

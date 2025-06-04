@@ -22,95 +22,101 @@ I find `println` very useful, no need to import.
 
 ## Getters and setters
 
-Avoid Get prefix and if you can, getters and setters altogether.
+Capital letter exports. Avoid `Get` prefix for getters.
 
-.code getters/main.go
-
-## Use export_test.go
-
-File named `export_test.go` will be only available from `package_test` package. Useful for testing:
-
-.code getters/export_test.go
-
-.code getters/main_test.go
+.code getters/pkg.go
 
 ## Type inference and re-declaration
 
 Go's type inference is generally quite powerful and convenient, but it does have some quirks and situations that can be surprising or require careful attention.
 
-.play -edit inference/main.go
+QUIZ: Find all compile errors.
+
+.code -numbers -edit inference/main.go
 
 ## Type inference and re-declaration
 
 Type inference will not work for `nil`.
 
-.code inference/main.go HLnil
+.code -numbers inference/main.go HLnil
 
 ## Type inference and re-declaration
 
 Re-declaration is allowed within the same block (or a child block) if the at least one new variable is re-declared but not all and the types do match.
 
-.code inference/main.go HLerr
+.code -numbers inference/main.go HLerr
+
+## Type conversion vs assertion
+
+Conversions are evaluated during compilation, assertions during runtime.
+
+QUIZ: What will this print?
+
+.play -numbers type_ass/main.go
 
 ## Type aliases
 
 Type alias is just another name for the same underlying type.
 
-.play -edit aliases/main.go
+QUIZ: Find all compile errors.
+
+.play -numbers -edit aliases/main.go HLalias
 
 ## Type aliases
 
 Type aliases cannot have methods: `cannot define new methods on non-local type MyAlias`
 
-.code aliases/main.go HLmethod
+.code -numbers aliases/main.go HLmethod
 
 ## Type aliases
 
 The inferred type `int` does not match `MyInt` type: `interface conversion: interface {} is int, not main.MyInt`
 
-.code aliases/main.go HLassert
+.code -numbers aliases/main.go HLassert
 
-## Loop inference
+## Loop variables
 
-The most famous Go quirk.
+QUIZ: What this will print with Go 1.21 or older.
 
-.play loopcopy/problem.go
+BONUS: What this will print with Go 1.22 or newer.
 
-## Loop inference
+.play loopcopy/main.go /START OMIT/,/END OMIT/
 
-Beware that `p` is a copy of the slice element.
+## Loop variables
 
-.play loopcopy/problem.go HLcopy
+The fix is no longer needed but you can spot these in the wild.
 
-## Loop inference
-
-Possible solution:
-
-.play loopcopy/main.go
+.play loopcopy/fixed.go /START OMIT/,/END OMIT/ HLcopy
 
 ## Errors
 
-Prefix error values with `Err` and suffix error types with `Error`. Prefer values over types.
+Prefix error values with `Err` and suffix error types with `Error`. Prefer values over types or combination of light-weight type and values.
 
-.code err_wrap/wrap.go
+.code err_wrap/wrap.go /START OMIT/,/END OMIT/
+
+Wrap carefully, avoid things like:
+
+    error: some error: there was an error: io.EOF
 
 ## Errors
 
 QUIZ: Find the bug.
 
-.code err_wrap/process_bug.go
+.code err_wrap/process_bug.go /START OMIT/,/END OMIT/
 
 ## Errors
 
 Error type checking is so much more complicated.
 
-.code err_wrap/process.go
+.code err_wrap/process.go /START OMIT/,/END OMIT/ HLref
 
 ## Errors
 
 When `return` is not necessary errors. Also: `errors.Join` but returns newlines.
 
-.play err_join/main.go
+.play err_join/main.go /START OMIT/,/END OMIT/
+
+Go team announced in June 2025 they will not be adding any error handling syntactic sugar anytime soon.
 
 ## Stack and heap
 
@@ -158,7 +164,7 @@ Value assignment with a default value.
 
 QUIZ: What will be on the `stderr`?
 
-.play defer/err_join.go
+.play defer/order.go
 
 ## Defer
 
@@ -192,12 +198,13 @@ QUIZ: What will be on the `stderr`?
 
 .play overflow/main.go
 
-## Goroutines
+## Use export_test.go
 
-QUIZ: What will be on the `stderr` up to version of *Go 1.21*?
-BONUS: What will be on the `stderr` with *Go 1.22+* or later?
+File named `export_test.go` will be only available from `package_test` package. Useful for testing:
 
-.play go_capture/main.go
+.code getters/export_test.go
+
+.code getters/main_test.go
 
 ## Resources
 
