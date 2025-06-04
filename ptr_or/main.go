@@ -1,5 +1,6 @@
 package main
 
+// START OMIT
 func FromOr[T any](value *T, defaultValue T) T {
 	if value == nil {
 		return defaultValue
@@ -15,8 +16,8 @@ func Or[T any](value *T, defaultValue T) *T {
 }
 
 func main() {
-	b := true
-	ptr := &b
-	value := FromOr(ptr, false)
-	println(value)
+	b := false
+	println(FromOr(&b, true))
 }
+
+// END OMIT

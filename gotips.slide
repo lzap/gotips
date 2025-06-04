@@ -126,9 +126,11 @@ The rough estimation is that structs up to about 60-100 bytes are faster to be p
 
 ## Stack and heap
 
+Variables can be allocated on stack. This depends on escape analysis of the compiler.
+
 QUIZ: what will this print?
 
-.code stack_alloc/main.go
+.play stack_alloc/main.go /START OMIT/,/END OMIT/
 
 ## Stack and heap
 
@@ -152,7 +154,7 @@ Dereferencing with an empty value.
 
 Dereferencing with a default value.
 
-.play ptr_or/main.go
+.play ptr_or/main.go /START OMIT/,/END OMIT/
 
 ## Pointers
 
@@ -167,6 +169,8 @@ QUIZ: What will be on the `stderr`?
 .play defer/order.go
 
 ## Defer
+
+Return arguments can be named.
 
 QUIZ: What will be on the `stderr`?
 
