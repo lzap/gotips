@@ -122,43 +122,82 @@ The rough estimation is that structs up to about 60-100 bytes are faster to be p
 
 QUIZ: what will this print?
 
-.code stackrealloc/quiz.go
+.code stack_alloc/main.go
 
 ## Stack and heap
 
 Go runtime creates local variables on stack, but as it grow it can move it to heap if needed.
 
-.play stackrealloc/main.go
+.code stack_alloc/func.go
 
 ## Pointers
 
 Grabbing a reference.
 
-.play ptr/to.go
+.play ptr_to/main.go
 
 ## Pointers
 
 Dereferencing with an empty value.
 
-.play ptr/from.go
+.play ptr_from/main.go
 
 ## Pointers
 
 Dereferencing with a default value.
 
-.play ptr/or.go
+.play ptr_or/main.go
 
 ## Pointers
 
 Value assignment with a default value.
 
-.play ptr/cmp.go
+.play ptr_cmp/main.go
 
 ## Defer
 
 QUIZ: What will be on the `stderr`?
 
 .play defer/err_join.go
+
+## Defer
+
+QUIZ: What will be on the `stderr`?
+
+.play named/main.go
+
+## Slices
+
+QUIZ: What will be on the `stderr`?
+
+.play slices_nil/main.go
+
+## Memory
+
+Expression `reflect.TypeOf(T).Size()` returns size of type T in bytes. Runs on 64bit platform.
+
+QUIZ: What will be on the `stderr`?
+
+.play mem_empty/main.go
+
+## Memory
+
+QUIZ: What will be on the `stderr`?
+
+.play mem_align/main.go
+
+## Memory
+
+QUIZ: What will be on the `stderr`?
+
+.play overflow/main.go
+
+## Goroutines
+
+QUIZ: What will be on the `stderr` up to version of *Go 1.21*?
+BONUS: What will be on the `stderr` with *Go 1.22+* or later?
+
+.play go_capture/main.go
 
 ## Resources
 

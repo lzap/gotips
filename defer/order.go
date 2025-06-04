@@ -1,6 +1,9 @@
 package main
 
 func main() {
-	defer println("one")
-	defer println("two")
+	i := 1
+	defer println(i)
+	i++	
+	defer println(i)
+	i = 42
 }

@@ -15,7 +15,8 @@ func Or[T any](value *T, defaultValue T) *T {
 }
 
 func main() {
-	ptr := To(true)
+	b := true
+	ptr := &b
 	value := FromOr(ptr, false)
 	println(value)
 }
