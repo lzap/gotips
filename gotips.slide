@@ -198,6 +198,12 @@ QUIZ: What will be on the `stderr`?
 
 ## Memory
 
+Built-in functions `new` and `make` will allocate on stack if possible.
+
+.play stack_new/main.go /START OMIT/,/END OMIT/ HLnew
+
+## Overflow
+
 QUIZ: What will be on the `stderr`?
 
 .play overflow/main.go
@@ -210,6 +216,10 @@ File named `export_test.go` will be only available from `package_test` package. 
 
 .code getters/main_test.go
 
+## Use testdata
+
+A directory named `testdata/` is ignored when `go get`ing a package (without `-t` flag). Put your test data in there.
+
 ## Resources
 
 - [Effective Go](https://go.dev/doc/effective_go)
@@ -220,10 +230,7 @@ File named `export_test.go` will be only available from `package_test` package. 
 
 Further ideas:
 
-- new/make does not guarantee heap
-- pass by copy or reference
-- implicit interfaces, one method interfaces, unique feature of Go
 - context
+- implicit interfaces, one method interfaces, unique feature of Go
 - logging log/slog, libs should have a simple interface, do not log AND return errors
 - local variable in a loop always allocate, compiler will not optimize it
-- testdata dir
