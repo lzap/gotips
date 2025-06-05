@@ -46,6 +46,22 @@ Re-declaration is allowed within the same block (or a child block) if the at lea
 
 .code -numbers inference/main.go HLerr
 
+## Minimal interface
+
+Go encourage to use minimal interfaces, a perfect example are the
+io.Writer This then becomes very flexible because the Writer can be a
+file or a byte buffer or a network.
+
+.code -numbers interfaces/main.go  HLerr
+
+Its also super useful in test, to create mock:
+
+## Minimal interface
+
+Go encourage to to also combine small interface, an example is the io.WriteCloser.
+
+.code -numbers interfaces2/main.go  HLerr
+
 ## Type conversion vs assertion
 
 Conversions are evaluated during compilation, assertions during runtime.
